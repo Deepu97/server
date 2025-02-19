@@ -139,16 +139,49 @@ function selectFrom(tokens) {
 }
 function updateTable(tokens) {
     const tableName = tokens[1];
-   
+    const query=tokens.join(' ');
+    console.log(arr);
+    
+      
     
 //    const value=file.readFileSync('exm.json');
 //     console.log(value);
     
     const setIndex = tokens.indexOf("SET");//which i want to set like age, name , id
     const whereIndex = tokens.indexOf("WHERE"); // update by id
-    console.log(setIndex+' '+whereIndex);
-//     const updates = tokens.slice(setIndex + 1, whereIndex).join("").split(",");
-//     const conditions = tokens.slice(whereIndex + 1).join("").split("=");
+    console.log(setIndex);
+    console.log(whereIndex);
+    
+    const updates = tokens.slice(setIndex + 1, whereIndex).join("").split(",");
+    const conditions = tokens.slice(whereIndex + 1).join("").split("=");
+console.log(conditions[1]);///id in update query
+console.log(updates);//array value which we want to change
+const val1=updates[0];//acess array index [0]
+const val=val1.split("="); //split the string array index[0] with 
+
+console.log(val);
+const key=val[0];//age
+const value= val[1];//age ki value
+
+    ///////////////
+    // let match = query.match(/age = (\d+)/);
+    // let age = match ? match[1] : null;
+    // console.log(age);/// age data from update query
+    
+
+
+    ///////////////
+   
+  let ind=arr.map((data)=>{
+    if(data.id==conditions[1]){
+      data.age=value;
+    }
+    return data;
+  })
+  console.log(ind);
+  
+  
+    
     
 //     value.forEach(row => {
 //         if (row[conditions[0].trim()] == conditions[1].trim()) {
@@ -158,10 +191,11 @@ function updateTable(tokens) {
 //             });
 //         }
 //     });
+
    
     
    
-    return `Table '${tableName}' updated successfully`;
+    return ind;
 }
 function deleteFrom(tokens){
     const tableName = tokens[2];
